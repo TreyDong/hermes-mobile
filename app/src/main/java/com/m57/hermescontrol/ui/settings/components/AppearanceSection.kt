@@ -115,79 +115,18 @@ internal fun AppearanceSection(
         )
         Spacer(modifier = Modifier.height(8.dp))
 
-        var presetsExpanded by remember { mutableStateOf(false) }
-        Box(modifier = Modifier.fillMaxWidth()) {
-            OutlinedButton(
-                onClick = { presetsExpanded = true },
-                enabled = !useDynamicColors,
-                modifier = Modifier.fillMaxWidth(),
-            ) {
-                Text(
-                    when (themePreset) {
-                        ThemePreset.DEFAULT -> stringResource(R.string.theme_preset_default)
-                        ThemePreset.MONOCHROME -> stringResource(R.string.theme_preset_monochrome)
-                        ThemePreset.GRUVBOX -> stringResource(R.string.theme_preset_gruvbox)
-                        ThemePreset.CATPPUCCIN -> stringResource(R.string.theme_preset_catppuccin)
-                        ThemePreset.AMOLED -> stringResource(R.string.theme_preset_amoled)
-                        ThemePreset.NEON_NOIR -> stringResource(R.string.theme_preset_neon_noir)
-                    },
-                )
-            }
-            DropdownMenu(
-                expanded = presetsExpanded,
-                onDismissRequest = { presetsExpanded = false },
-                modifier = Modifier.fillMaxWidth(0.85f),
-            ) {
-                ThemePreset.entries.forEach { preset ->
-                    DropdownMenuItem(
-                        text = {
-                            Text(
-                                when (preset) {
-                                    ThemePreset.DEFAULT -> {
-                                        stringResource(
-                                            R.string.theme_preset_default,
-                                        )
-                                    }
-
-                                    ThemePreset.MONOCHROME -> {
-                                        stringResource(
-                                            R.string.theme_preset_monochrome,
-                                        )
-                                    }
-
-                                    ThemePreset.GRUVBOX -> {
-                                        stringResource(
-                                            R.string.theme_preset_gruvbox,
-                                        )
-                                    }
-
-                                    ThemePreset.CATPPUCCIN -> {
-                                        stringResource(
-                                            R.string.theme_preset_catppuccin,
-                                        )
-                                    }
-
-                                    ThemePreset.AMOLED -> {
-                                        stringResource(
-                                            R.string.theme_preset_amoled,
-                                        )
-                                    }
-
-                                    ThemePreset.NEON_NOIR -> {
-                                        stringResource(
-                                            R.string.theme_preset_neon_noir,
-                                        )
-                                    }
-                                },
-                            )
-                        },
-                        onClick = {
-                            onThemePresetChange(preset)
-                            presetsExpanded = false
-                        },
-                    )
-                }
-            }
+        // Theme preset selection removed in refactor — only DEFAULT remains.
+        // Show a static "TRAE Indigo" label so the UI still acknowledges this surface.
+        OutlinedButton(
+            onClick = {},
+            enabled = false,
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            Text(
+                when (themePreset) {
+                    ThemePreset.DEFAULT -> "TRAE Indigo (fixed)"
+                },
+            )
         }
 
         Spacer(modifier = Modifier.height(16.dp))

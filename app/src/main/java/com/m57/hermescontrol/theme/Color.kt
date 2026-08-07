@@ -2,7 +2,8 @@ package com.m57.hermescontrol.theme
 
 import androidx.compose.ui.graphics.Color
 
-// Hermes Mobile brand palette — v3 (Material You rewrite).
+// Hermes Mobile brand palette — TRAE-inspired personal refactor.
+// Brand is now TRAE-style indigo→violet (was "Voltage Purple" pre-refactor).
 //
 // On Android 12+ (API 31+) the app uses dynamic colour derived from the user's
 // wallpaper — this palette is NOT used for primary/surface roles on those
@@ -11,13 +12,13 @@ import androidx.compose.ui.graphics.Color
 // brand-defined. All pairs verified for WCAG AA contrast (4.5:1 text, 3:1
 // large text / icons).
 
-// ── Brand: Voltage Purple (primary) ──────────────────────────────────────
+// ── Brand: TRAE Indigo/Violet (primary) ─────────────────────────────────
 
-val HermesPurple = Color(0xFF7C5CFF)
+val HermesPurple = Color(0xFF5B5BFF)
 val HermesPurpleLight = Color(0xFFAC93FF)
-val HermesPurpleDark = Color(0xFF5A3FE0)
-val HermesPurpleContainer = Color(0xFF2B2159)
-val HermesPurpleOnContainer = Color(0xFFD9CCFF)
+val HermesPurpleDark = Color(0xFF7B3FF2)
+val HermesPurpleContainer = Color(0xFFEEF0FF)
+val HermesPurpleOnContainer = Color(0xFF2A2A8C)
 
 // ── Brand: Plasma Amber (secondary) ─────────────────────────────────────
 
@@ -45,7 +46,7 @@ val DarkScrim = Color(0xFF000000)
 
 // ── Light surfaces (5-step elevation ladder) ────────────────────────────
 
-val LightBackground = Color(0xFFF7F6FB)
+val LightBackground = Color(0xFFF5F5F5)
 val LightSurface = Color(0xFFFFFFFF)
 val LightSurfaceVariant = Color(0xFFEFEDF4)
 val LightSurfaceContainerLowest = Color(0xFFFFFFFF)
