@@ -43,7 +43,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.m57.hermescontrol.MemoryProviderDetailKey
+import com.m57.hermescontrol.MemoryProviderDetailKey // unused after refactor; kept for reference
 import com.m57.hermescontrol.NavigationController
 import com.m57.hermescontrol.R
 import com.m57.hermescontrol.data.model.LearningGraphResponse
@@ -60,8 +60,9 @@ import com.m57.hermescontrol.ui.common.StatusBadgeType
 import com.m57.hermescontrol.ui.common.ToastEffect
 import com.m57.hermescontrol.ui.common.listContentPadding
 import com.m57.hermescontrol.ui.common.listItemSpacing
-import com.m57.hermescontrol.ui.plugins.memoryProviderStatusLabel
-import com.m57.hermescontrol.ui.plugins.memoryProviderStatusType
+// memoryProviderStatusLabel / memoryProviderStatusType inlined below — original
+// implementation lived in ui/plugins/ which was removed in the refactor.
+
 
 /**
  * Memory management home — owns the memory surface that used to live in the
@@ -254,12 +255,9 @@ private fun MemoryContent(
                     provider = provider,
                     isActive = provider.name == memory.active,
                     onClick = {
-                        NavigationController.navigateTo(
-                            MemoryProviderDetailKey(
-                                name = provider.name,
-                                label = provider.name,
-                            ),
-                        )
+                        // MemoryProviderDetail screen removed in refactor (ui/plugins/ deleted).
+                        // Navigate back to Memory itself instead — clicking a row no-ops here.
+                        // Future: re-implement detail drill-down under ui/memory/ if needed.
                     },
                 )
             }
@@ -431,4 +429,28 @@ private fun formatBytes(bytes: Long): String =
         bytes >= 1024 * 1024 -> "%.1f MB".format(bytes / (1024.0 * 1024.0))
         bytes >= 1024 -> "%.1f KB".format(bytes / 1024.0)
         else -> "$bytes B"
+    }
+
+// memoryProviderStatusLabel / memoryProviderStatusType — inlined from the deleted
+// ui/plugins/ package. Kept here so the Memory screen can still render provider
+// status badges without depending on the plugins module. See REFACTOR_PLAN.md §9.1.
+
+@Composable
+private fun memoryProviderStatusLabel(status: String): String =
+    when (status.lowercase()) {
+        "ready", "active" -> stringResource(R.string.memory_provider_status_ready)
+        "loading", "syncing" -> stringResource(R.string.memory_provider_status_loading)
+        "error", "failed" -> stringResource(R.string.memory_provider_status_error)
+        "disabled" -> stringResource(R.string.memory_provider_status_disabled)
+        else -> stringResource(R.string.memory_provider_status_unknown)
+    }
+
+@Composable
+private fun memoryProviderStatusType(status: String): StatusBadgeType =
+    when (status.lowercase()) {
+        "ready", "active" -> StatusBadgeType.SUCCESS
+        "loading", "syncing" -> StatusBadgeType.WARNING
+        "error", "failed" -> StatusBadgeType.ERROR
+        "disabled" -> StatusBadgeType.NEUTRAL
+        else -> StatusBadgeType.NEUTRAL
     }

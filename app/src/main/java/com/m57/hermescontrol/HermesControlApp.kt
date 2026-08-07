@@ -9,7 +9,7 @@ import coil.decode.ImageDecoderDecoder
 import com.m57.hermescontrol.data.local.AuthManager
 import com.m57.hermescontrol.data.remote.NetworkMonitor
 import com.m57.hermescontrol.data.remote.OkHttpProvider
-import com.m57.hermescontrol.ui.analytics.AnalyticsPreloader
+// AnalyticsPreloader removed in refactor — see REFACTOR_PLAN.md §9.1
 
 class HermesControlApp :
     Application(),
@@ -21,10 +21,7 @@ class HermesControlApp :
         // separate standalone/default code path anywhere in the app.
         AuthManager.ensureDefaultProfile()
         NetworkMonitor.init(this)
-        // Issue #537 follow-up (A): preload analytics in the background after launch
-        // so the tab renders instantly when opened (the usage endpoint is slow on a
-        // cold backend). Fire-and-forget; never blocks UI startup.
-        AnalyticsPreloader.preload(this)
+        // AnalyticsPreloader removed in refactor — see REFACTOR_PLAN.md §9.1
     }
 
     override fun newImageLoader(): ImageLoader =

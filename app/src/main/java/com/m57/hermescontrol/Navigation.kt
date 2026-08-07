@@ -50,16 +50,15 @@ import com.m57.hermescontrol.theme.LocalHermesStatusColors
 import com.m57.hermescontrol.ui.common.DisableDrawerGestures
 import com.m57.hermescontrol.ui.common.DrawerGestureController
 import com.m57.hermescontrol.ui.common.LocalDrawerGestureController
-import com.m57.hermescontrol.ui.plugins.MemoryProviderDetailScreen
+
 import com.m57.hermescontrol.ui.settings.SettingsAboutPage
 import com.m57.hermescontrol.ui.settings.SettingsAppearancePage
 import com.m57.hermescontrol.ui.settings.SettingsBehaviorPage
 import com.m57.hermescontrol.ui.settings.SettingsChatPage
 import com.m57.hermescontrol.ui.settings.SettingsConnectionPage
 import com.m57.hermescontrol.ui.settings.SettingsViewModel
-import com.m57.hermescontrol.ui.toolsets.ToolsetDetailScreen
+
 import kotlinx.coroutines.launch
-import com.m57.hermescontrol.ui.authlogin.AuthLoginScreen as AuthLoginScreenContent
 import com.m57.hermescontrol.ui.landing.LandingScreen as LandingScreenContent
 
 private fun appEntryProvider(
@@ -132,23 +131,7 @@ private fun appEntryProvider(
         )
     }
 
-    // ── Toolset detail drill-down (issue #782) ────────────────────────
-    entry<ToolsetDetailKey> { key ->
-        ToolsetDetailScreen(
-            name = key.name,
-            label = key.label,
-            onBack = { NavigationController.goBack() },
-        )
-    }
-
-    // ── Memory provider detail drill-down (issue #783) ─────────────────
-    entry<MemoryProviderDetailKey> { key ->
-        MemoryProviderDetailScreen(
-            name = key.name,
-            label = key.label,
-            onBack = { NavigationController.goBack() },
-        )
-    }
+    // ToolsetDetail / MemoryProviderDetail entries removed in refactor — see REFACTOR_PLAN.md §9.1
 }
 
 @Composable
